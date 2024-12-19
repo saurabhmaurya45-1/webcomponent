@@ -72,6 +72,59 @@ customElements.define("hello-world", HelloWorld);
 
 ### Life cycle of web components
 
+Custom Element go into many lifecycle method from creating till destroying like:
+- Element creation/initialization
+- Element insertion into DOM
+- Updation via event like click event or more
+- Deletion from the DOM
+
+### Methods
+- constructor()
+- connectedCallback()
+- attributeChangedCallback(name,oldValue, newValue)
+- adoptedCallback()
+- disconnectedCallback()
+
+### constructor()
+- It is used for creating and initializing ES6 classes and is called when an instance of an element is called.
+- It is used to initialize component state, setting up event listener or create instance of shadow DOM.
+- We will call super() method in the 1st line inside constructor(). It inherits all the properties and ,methods of the class it extends.
+
+### connectedCallback()
+- It is called when the element is added to the DOM. We can set attribute, fetch resources, render templates and many more.
+
+### disconnectedCallback()
+- It is called when element is removed from the DOM. It is used to clean or free up resources like
+  - unsubscribe events from DOM
+  - stop interval timers
+  - free resources that won't be garbage collected automatically
+
+### attributeChangedCallback()
+- It is called when attributes are added, removed, updated, or replaced. 
+- We need to speficy which attribute will change in this method.
+
+```
+  static get observedAttribute(){
+    return ["attr1","attr2"] // array of attribute
+  }
+```
+
+```
+attributeChangedCallback(name, oldValue, newValue){
+  // do operation
+  console.log(`${name}'s name changed from ${oldValue} to ${newValue}`);
+}
+```
+
+### adoptedCallback()
+- It is called when custom element is moved from one document to another one within document
+
+```
+adoptNode(element) method  
+```
+- It is used when we are dealing with iframe elements and each iframe has its own DOM.
+
+
 
 
 
