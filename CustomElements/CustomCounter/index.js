@@ -7,7 +7,8 @@ class CustomCounter extends HTMLElement {
   }
 
   countElement;
-
+  incrementBtn;
+  decrementBtn;
   constructor() {
     super();
     this._shadowRoot = this.attachShadow({ mode: "open" });
@@ -47,12 +48,16 @@ class CustomCounter extends HTMLElement {
     this.count = this.initialValue || 0;
     this.countElement.textContent = this.count;
     //add event listeners for increment and decrement
-    this._shadowRoot
-      .querySelector("#increment")
-      .addEventListener("button-click", this._increment.bind(this));
-    this._shadowRoot
-      .querySelector("#decrement")
-      .addEventListener("button-click", this._decrement.bind(this));
+    this.incrementBtn = this._shadowRoot.querySelector("#increment");
+    this.incrementBtn.addEventListener(
+      "button-click",
+      this._increment.bind(this)
+    );
+    this.decrementBtn = this._shadowRoot.querySelector("#decrement");
+    this.decrementBtn.addEventListener(
+      "button-click",
+      this._decrement.bind(this)
+    );
   }
 
   _increment() {
@@ -62,6 +67,17 @@ class CustomCounter extends HTMLElement {
   _decrement() {
     this.count -= this.step;
     this.countElement.textContent = this.count;
+  }
+
+  disconnectedCallback() {
+    this.incrementBtn.removeEventListener(
+      "button-click",
+      this._increment.bind(this)
+    );
+    this.decrementBtn.removeEventListener(
+      "button-click",
+      this._decrement.bind(this)
+    );
   }
 }
 
