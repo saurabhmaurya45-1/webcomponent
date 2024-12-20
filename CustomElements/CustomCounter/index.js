@@ -49,17 +49,17 @@ class CustomCounter extends HTMLElement {
     //add event listeners for increment and decrement
     this._shadowRoot
       .querySelector("#increment")
-      .addEventListener("button-click", this.increment.bind(this));
+      .addEventListener("button-click", this._increment.bind(this));
     this._shadowRoot
       .querySelector("#decrement")
-      .addEventListener("button-click", this.decrement.bind(this));
+      .addEventListener("button-click", this._decrement.bind(this));
   }
 
-  increment() {
+  _increment() {
     this.count += 1;
     this.countElement.textContent = this.count;
   }
-  decrement() {
+  _decrement() {
     this.count -= this.step;
     this.countElement.textContent = this.count;
   }
